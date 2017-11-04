@@ -1,5 +1,5 @@
 # Identd
-A simple server library communicating over the Identd protocol defined in RFC1413.
+A simple server library for communicating over the Identd protocol defined in RFC1413.
 
 The server opens up port 113 and listens for incoming messages to respond to.
 
