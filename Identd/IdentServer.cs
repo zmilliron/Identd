@@ -60,7 +60,7 @@ namespace Identd
         public event EventHandler<IdentErrorEventArgs> IdentError;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Ident.IdentServer"/> class.
+        /// Initializes a new instance of the <see cref="IdentServer"/> class.
         /// </summary>
         /// <param name="userName">The username to provide in response to an identity request.</param>
         public IdentServer(string userName)
