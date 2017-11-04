@@ -25,8 +25,14 @@ namespace Identd
         /// The default port on which the server listens for connections.
         /// </summary>
         public const int IDENTPORT = 113;
+
+        /// <summary>
+        /// The default timeout while listening for incoming connections.
+        /// </summary>
+        public const int DEFAULTTIMEOUT = 10000;
+
         private const string LINETERMINATOR = "\r\n";
-        private const int DEFAULTTIMEOUT = 10000;
+        
 
         private Thread _serverThread;
         private string _userName;
@@ -43,6 +49,7 @@ namespace Identd
         /// Gets or sets the duration in milliseconds the server listens for incoming connections
         /// before timing out.  Default timeout is 10 seconds.
         /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException"/>
         public int Timeout
         {
             get { return (_timeout); }
@@ -63,10 +70,12 @@ namespace Identd
         /// Initializes a new instance of the <see cref="IdentServer"/> class.
         /// </summary>
         /// <param name="userName">The username to provide in response to an identity request.</param>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
         public IdentServer(string userName)
         {
             if(userName == null) { throw new ArgumentNullException(nameof(userName)); }
-            if (string.IsNullOrEmpty(userName)) { throw new ArgumentException(Properties.Resources.EmptyOrWhitespaceError, nameof(userName)); }
+            if (string.IsNullOrWhiteSpace(userName)) { throw new ArgumentException(Properties.Resources.EmptyOrWhitespaceError, nameof(userName)); }
 
             _userName = userName;
             Timeout = DEFAULTTIMEOUT;
